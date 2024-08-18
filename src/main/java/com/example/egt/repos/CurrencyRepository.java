@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface CurrencyRepository extends JpaRepository<Currency, Long> {
 
-    Currency findTopByCodeOrderByTimeStampDesc(String code);
+    Currency findTopByBaseOrderByDateDesc(String base);
 
-    List<Currency> findByCodeAndTimeStampBetweenOrderByTimeStampDesc(
-            String code, LocalDateTime startDate, LocalDateTime endDate);
+    List<Currency> findByBaseAndDateBetweenOrderByDateDesc(
+            String base, LocalDateTime startDate, LocalDateTime endDate);
 }

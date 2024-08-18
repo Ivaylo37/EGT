@@ -32,7 +32,7 @@ public class CurrencyServiceImpl implements CurrencyService {
             return cachedCurrency;
         }
 
-        Currency currency = currencyRepository.findTopByCodeOrderByTimeStampDesc(code);
+        Currency currency = currencyRepository.findTopByBaseOrderByDateDesc(code);
         if (currency != null) {
             redisTemplate.opsForValue().set(cacheKey, currency);
         }
@@ -45,7 +45,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         LocalDateTime endDate = LocalDateTime.now();
         LocalDateTime startDate = endDate.minusHours(periodHours);
 
-        return currencyRepository.findByCodeAndTimeStampBetweenOrderByTimeStampDesc(
+        return currencyRepository.findByBaseAndDateBetweenOrderByDateDesc(
                 code, startDate, endDate);
     }
 }

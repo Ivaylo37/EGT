@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -22,18 +22,18 @@ public class Currency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private long timestamp;
+
     @Column(nullable = false, length = 3)
-    private String code;
-
-    @Column(nullable = false, precision = 19, scale = 6)
-    private BigDecimal rate;
-
-    @Column(name = "base_code", nullable = false, length = 3)
-    private String baseCode;
+    private String base;
 
     @Column(nullable = false)
     private LocalDate date;
 
-    @Column(name = "last_updated", nullable = false)
-    private LocalDateTime lastUpdated;
+    @ElementCollection
+    @CollectionTable(name = "currency_rates", joinColumns = @JoinColumn(name = "currency_id"))
+    @MapKeyColumn(name = "currency_code")
+    @Column(name = "rate")
+    private Map<String, BigDecimal> rates;
 }

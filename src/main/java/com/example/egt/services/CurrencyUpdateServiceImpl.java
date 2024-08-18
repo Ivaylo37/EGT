@@ -25,15 +25,13 @@ public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
     public void updateCurrencyRates() {
         FixerApiResponse response = fixerApiService.getLatestRates();
         if (response.isSuccess()) {
-            response.getRates().forEach((code, rate) -> {
                 Currency currency = new Currency();
-                currency.setCode(code);
-                currency.setRate(rate);
-                currency.setBaseCode(response.getBase());
+                currency.setId(currency.getId());
+                currency.setTimestamp(response.getTimestamp());
+                currency.setBase(response.getBase());
                 currency.setDate(response.getDate());
-                currency.setLastUpdated(LocalDateTime.now());
+                currency.setRates(response.getRates());
                 currencyRepository.save(currency);
-            });
         } else {
             // Handle error or log it
             System.err.println("Failed to fetch currency rates");
