@@ -11,8 +11,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI usersMicroserviceOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Your API Title")
-                        .description("Your API Description")
+                .info(new Info().title("EGT task")
+                        .description("This is an application for EGT task")
                         .version("1.0"));
     }
 }

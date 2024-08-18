@@ -8,7 +8,6 @@ import com.example.egt.services.contracts.FixerApiService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 
 @Service
 public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
@@ -23,8 +22,10 @@ public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
 
     @Scheduled(fixedRate = 3600000) // Run every hour (3600000 milliseconds)
     public void updateCurrencyRates() {
+        System.out.println("Updating Currency Rates");
         FixerApiResponse response = fixerApiService.getLatestRates();
         if (response.isSuccess()) {
+            response.getRates().forEach((code, rate) -> {
                 Currency currency = new Currency();
                 currency.setId(currency.getId());
                 currency.setTimestamp(response.getTimestamp());
@@ -32,8 +33,8 @@ public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
                 currency.setDate(response.getDate());
                 currency.setRates(response.getRates());
                 currencyRepository.save(currency);
+            });
         } else {
-            // Handle error or log it
             System.err.println("Failed to fetch currency rates");
         }
     }
