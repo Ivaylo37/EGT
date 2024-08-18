@@ -21,6 +21,7 @@ public class CurrencyServiceImpl implements CurrencyService {
         this.currencyRepository = currencyRepository;
         this.redisTemplate = redisTemplate;
     }
+
     @Cacheable(value = "currencies", key = "#code")
     @Override
     public Currency getCurrencyByCode(String code) {
