@@ -1,9 +1,8 @@
-package com.example.egt;
+package com.example.egt.services;
 
 import com.example.egt.exceptions.CurrencyNotFoundException;
 import com.example.egt.models.Currency;
 import com.example.egt.repos.CurrencyRepository;
-import com.example.egt.services.CurrencyServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
