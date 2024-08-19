@@ -28,6 +28,6 @@ public class Statistics {
     @Column(nullable = false)
     private LocalDateTime timestamp;
 
-    @Column(name = "end_client_id", nullable = false)
-    private String endClientId;
+    @Column(name = "client_id", nullable = false)
+    private String clientId;
 }

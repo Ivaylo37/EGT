@@ -5,6 +5,7 @@ import com.example.egt.models.Currency;
 import com.example.egt.models.requestDtos.CurrentRequestDTO;
 import com.example.egt.models.requestDtos.HistoryRequestDTO;
 import com.example.egt.services.contracts.CurrencyService;
+import com.example.egt.services.contracts.RequestService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,10 +28,12 @@ import java.util.List;
 public class CurrencyJsonController {
 
     private final CurrencyService currencyService;
+    private final RequestService requestService;
 
     @Autowired
-    public CurrencyJsonController(CurrencyService currencyService) {
+    public CurrencyJsonController(CurrencyService currencyService, RequestService requestService) {
         this.currencyService = currencyService;
+        this.requestService = requestService;
     }
 
 
@@ -48,7 +51,7 @@ public class CurrencyJsonController {
     @PostMapping("/currency")
     public ResponseEntity<?> getCurrency(@Valid @RequestBody CurrentRequestDTO currentRequestDto) {
         try {
-
+            requestService.processRequest(currentRequestDto);
             Currency currency = currencyService.getCurrencyByCode(currentRequestDto.getBase());
             return ResponseEntity.ok(currency);
         } catch (CurrencyNotFoundException e) {
@@ -73,6 +76,7 @@ public class CurrencyJsonController {
     @PostMapping("/history")
     public ResponseEntity<?> getCurrencyHistory(@Valid @RequestBody HistoryRequestDTO historyRequestDto) {
         try {
+            requestService.processHistoryRequest(historyRequestDto);
             List<Currency> history = currencyService.getCurrencyHistory(historyRequestDto.getBase(), historyRequestDto.getPeriod());
             return ResponseEntity.ok(history);
         } catch (CurrencyNotFoundException e) {

@@ -6,9 +6,11 @@ import com.example.egt.models.requestDtos.CurrentRequestDTO;
 import com.example.egt.models.requestDtos.HistoryRequestDTO;
 import com.example.egt.repos.RequestRepository;
 import com.example.egt.services.contracts.RequestService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Service
 public class RequestServiceImpl implements RequestService {
 
     private final RequestRepository requestRepository;
