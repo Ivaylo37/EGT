@@ -30,7 +30,7 @@ public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
                 currency.setId(currency.getId());
                 currency.setTimestamp(response.getTimestamp());
                 currency.setBase(response.getBase());
-                currency.setDate(response.getDate());
+                currency.setDate(response.getDate().atStartOfDay());
                 currency.setRates(response.getRates());
                 currencyRepository.save(currency);
             });

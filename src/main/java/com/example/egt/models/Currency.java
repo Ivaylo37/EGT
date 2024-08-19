@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @Getter
@@ -31,7 +32,7 @@ public class Currency {
 
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ElementCollection
     @CollectionTable(name = "currency_rates", joinColumns = @JoinColumn(name = "currency_id"))
