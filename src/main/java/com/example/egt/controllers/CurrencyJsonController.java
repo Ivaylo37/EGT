@@ -2,8 +2,8 @@ package com.example.egt.controllers;
 
 import com.example.egt.exceptions.CurrencyNotFoundException;
 import com.example.egt.models.Currency;
-import com.example.egt.models.requestDtos.CurrentRequestDto;
-import com.example.egt.models.requestDtos.HistoryRequestDto;
+import com.example.egt.models.requestDtos.CurrentRequestDTO;
+import com.example.egt.models.requestDtos.HistoryRequestDTO;
 import com.example.egt.services.contracts.CurrencyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -46,7 +46,7 @@ public class CurrencyJsonController {
             @ApiResponse(responseCode = "404", description = "Currency with this symbol was not found",
                     content = @Content)})
     @PostMapping("/currency")
-    public ResponseEntity<?> getCurrency(@Valid @RequestBody CurrentRequestDto currentRequestDto) {
+    public ResponseEntity<?> getCurrency(@Valid @RequestBody CurrentRequestDTO currentRequestDto) {
         try {
             Currency currency = currencyService.getCurrencyByCode(currentRequestDto.getBase());
             return ResponseEntity.ok(currency);
@@ -70,7 +70,7 @@ public class CurrencyJsonController {
             @ApiResponse(responseCode = "404", description = "Currency with this symbol was not found",
                     content = @Content)})
     @PostMapping("/history")
-    public ResponseEntity<?> getCurrencyHistory(@Valid @RequestBody HistoryRequestDto historyRequestDto) {
+    public ResponseEntity<?> getCurrencyHistory(@Valid @RequestBody HistoryRequestDTO historyRequestDto) {
         try {
             List<Currency> history = currencyService.getCurrencyHistory(historyRequestDto.getBase(), historyRequestDto.getPeriod());
             return ResponseEntity.ok(history);
