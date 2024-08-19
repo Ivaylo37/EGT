@@ -1,5 +1,6 @@
 package com.example.egt.services;
 
+import com.example.egt.exceptions.CurrencyNotFoundException;
 import com.example.egt.models.Currency;
 import com.example.egt.repos.CurrencyRepository;
 import com.example.egt.services.contracts.CurrencyService;
@@ -35,6 +36,8 @@ public class CurrencyServiceImpl implements CurrencyService {
         Currency currency = currencyRepository.findTopByBaseOrderByDateDesc(code);
         if (currency != null) {
             redisTemplate.opsForValue().set(cacheKey, currency);
+        } else {
+            throw new CurrencyNotFoundException(code);
         }
         return currency;
     }

@@ -1,5 +1,6 @@
 package com.example.egt.controllers;
 
+import com.example.egt.exceptions.CurrencyNotFoundException;
 import com.example.egt.models.Currency;
 import com.example.egt.models.requestDtos.CurrentRequestDto;
 import com.example.egt.services.contracts.CurrencyService;
