@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CurrentRequestDTO implements JsonRequest {
+public class CurrentRequestDTO {
 
     @NotNull
     String requestId;

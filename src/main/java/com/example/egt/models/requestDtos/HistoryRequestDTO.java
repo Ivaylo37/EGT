@@ -12,19 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class HistoryRequestDTO implements JsonRequest{
-
-    @NotNull
-    String requestId;
-
-    @NotNull
-    LocalDateTime requestDate;
-
-    @NotNull
-    int clientId;
-
-    @NotNull
-    String base;
+public class HistoryRequestDTO extends CurrentRequestDTO{
 
     @NotNull
     int period;

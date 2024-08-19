@@ -2,6 +2,7 @@
 //
 //
 //import com.example.egt.exceptions.CurrencyNotFoundException;
+//import com.example.egt.exceptions.DuplicateRequestException;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,11 @@
 //    @ExceptionHandler(CurrencyNotFoundException.class)
 //    public ResponseEntity<String> handleCurrencyNotFoundException(CurrencyNotFoundException ex) {
 //        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+//    }
+//
+//    @ExceptionHandler(DuplicateRequestException.class)
+//    public ResponseEntity<String> handleDuplicateRequestException(DuplicateRequestException ex) {
+//        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 //    }
 //
 //    @ExceptionHandler(IllegalArgumentException.class)
