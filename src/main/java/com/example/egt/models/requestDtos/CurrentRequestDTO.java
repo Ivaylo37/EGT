@@ -1,5 +1,6 @@
 package com.example.egt.models.requestDtos;
 
+import com.example.egt.models.Request;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CurrentRequestDTO {
+public class CurrentRequestDTO implements JsonRequest {
 
     @NotNull
     String requestId;
@@ -21,7 +22,7 @@ public class CurrentRequestDTO {
     LocalDateTime requestDate;
 
     @NotNull
-    int clientId;
+    String clientId;
 
     @NotNull
     String base;

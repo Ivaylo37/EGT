@@ -48,6 +48,7 @@ public class CurrencyJsonController {
     @PostMapping("/currency")
     public ResponseEntity<?> getCurrency(@Valid @RequestBody CurrentRequestDTO currentRequestDto) {
         try {
+
             Currency currency = currencyService.getCurrencyByCode(currentRequestDto.getBase());
             return ResponseEntity.ok(currency);
         } catch (CurrencyNotFoundException e) {
