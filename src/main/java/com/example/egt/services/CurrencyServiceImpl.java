@@ -15,9 +15,9 @@ public class CurrencyServiceImpl implements CurrencyService {
 
 
     private final CurrencyRepository currencyRepository;
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Currency> redisTemplate;
 
-    public CurrencyServiceImpl(CurrencyRepository currencyRepository, RedisTemplate<String, Object> redisTemplate) {
+    public CurrencyServiceImpl(CurrencyRepository currencyRepository, RedisTemplate<String, Currency> redisTemplate) {
         this.currencyRepository = currencyRepository;
         this.redisTemplate = redisTemplate;
     }

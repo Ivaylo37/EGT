@@ -18,5 +18,5 @@ public class CurrentRequestDto {
     String requestId;
     LocalDateTime requestDate;
     int clientId;
-    String currency;
+    String base;
 }

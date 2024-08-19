@@ -38,6 +38,6 @@ public class CurrencyJsonController {
                     content = @Content)})
     @PostMapping("/currency")
     public Currency getCurrency(@RequestBody CurrentRequestDto currentRequestDto) {
-        return currencyService.getCurrencyByCode(currentRequestDto.getCurrency());
+        return currencyService.getCurrencyByCode(currentRequestDto.getBase());
     }
 }

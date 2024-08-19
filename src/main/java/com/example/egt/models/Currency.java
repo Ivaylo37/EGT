@@ -1,5 +1,6 @@
 package com.example.egt.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,10 +26,11 @@ public class Currency {
     @Column(nullable = false)
     private long timestamp;
 
-    @Column(nullable = false, length = 3)
+    @Column(nullable = false)
     private String base;
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @ElementCollection
