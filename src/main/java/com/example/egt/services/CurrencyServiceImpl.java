@@ -42,13 +42,25 @@ public class CurrencyServiceImpl implements CurrencyService {
         return currency;
     }
 
-    @Cacheable(value = "currencyHistory", key = "#code + ':' + #periodHours")
     @Override
     public List<Currency> getCurrencyHistory(String code, int periodHours) {
+        if (code == null || code.trim().isEmpty()) {
+            throw new IllegalArgumentException("Currency code cannot be null or empty");
+        }
+        if (periodHours <= 0) {
+            throw new IllegalArgumentException("Period hours must be a positive integer");
+        }
+
         LocalDateTime endDate = LocalDateTime.now();
         LocalDateTime startDate = endDate.minusHours(periodHours);
 
-        return currencyRepository.findByBaseAndDateBetweenOrderByDateDesc(
-                code, startDate, endDate);
+        List<Currency> currencyHistory = currencyRepository.findByBaseAndDateBetweenOrderByDateDesc(
+                code.toUpperCase(), startDate, endDate);
+
+        if (currencyHistory.isEmpty()) {
+            throw new CurrencyNotFoundException("No currency data found for code: " + code);
+        }
+
+        return currencyHistory;
     }
 }
