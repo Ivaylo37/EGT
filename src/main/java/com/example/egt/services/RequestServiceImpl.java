@@ -6,7 +6,9 @@ import com.example.egt.models.requestDtos.CommandDTO;
 import com.example.egt.models.requestDtos.CurrentRequestDTO;
 import com.example.egt.models.requestDtos.HistoryRequestDTO;
 import com.example.egt.repos.RequestRepository;
+
 import com.example.egt.services.contracts.RequestService;
+import com.example.egt.services.contracts.StatisticService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,10 +16,15 @@ import java.time.LocalDateTime;
 @Service
 public class RequestServiceImpl implements RequestService {
 
-    private final RequestRepository requestRepository;
+    private static final String service1 = "EXT_SERVICE_1";
+    private static final String service2 = "EXT_SERVICE_2";
 
-    public RequestServiceImpl(RequestRepository requestRepository) {
+    private final RequestRepository requestRepository;
+    private final StatisticService statisticService;
+
+    public RequestServiceImpl(RequestRepository requestRepository, StatisticService statisticService) {
         this.requestRepository = requestRepository;
+        this.statisticService = statisticService;
     }
 
 
@@ -30,6 +37,7 @@ public class RequestServiceImpl implements RequestService {
         request.setTimestamp(LocalDateTime.now());
         request.setClientId(requestDTO.getClientId());
         request.setBaseCurrency(requestDTO.getBase());
+        statisticService.recordStatistics(service1, request.getRequestId(), request.getTimestamp(), request.getClientId());
         requestRepository.save(request);
     }
 
@@ -42,6 +50,7 @@ public class RequestServiceImpl implements RequestService {
         request.setClientId(historyRequestDTO.getClientId());
         request.setBaseCurrency(historyRequestDTO.getBase());
         request.setPeriod(historyRequestDTO.getPeriod());
+        statisticService.recordStatistics(service1, request.getRequestId(), request.getTimestamp(), request.getClientId());
         requestRepository.save(request);
     }
 
@@ -65,6 +74,7 @@ public class RequestServiceImpl implements RequestService {
         request.setTimestamp(LocalDateTime.now());
         request.setClientId(commandDTO.getGet().getClient());
         request.setBaseCurrency(commandDTO.getGet().getCurrency());
+        statisticService.recordStatistics(service2, request.getRequestId(), request.getTimestamp(), request.getClientId());
         requestRepository.save(request);
     }
 
@@ -80,6 +90,7 @@ public class RequestServiceImpl implements RequestService {
         request.setClientId(commandDTO.getGet().getClient());
         request.setBaseCurrency(commandDTO.getGet().getCurrency());
         request.setPeriod(commandDTO.getHistory().getPeriod());
+        statisticService.recordStatistics(service2, request.getRequestId(), request.getTimestamp(), request.getClientId());
         requestRepository.save(request);
     }
 

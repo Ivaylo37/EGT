@@ -3,9 +3,11 @@ package com.example.egt.services;
 import com.example.egt.models.Statistics;
 import com.example.egt.repos.StatisticsRepository;
 import com.example.egt.services.contracts.StatisticService;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Service
 public class StatisticServiceImpl implements StatisticService {
 
     private final StatisticsRepository statisticsRepository;
