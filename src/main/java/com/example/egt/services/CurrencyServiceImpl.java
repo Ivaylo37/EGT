@@ -26,7 +26,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public Currency getCurrencyByCode(String code) {
         String cacheKey = "currencies:" + code;
-        Currency cachedCurrency = (Currency) redisTemplate.opsForValue().get(cacheKey);
+        Currency cachedCurrency = redisTemplate.opsForValue().get(cacheKey);
 
         if (cachedCurrency != null) {
             return cachedCurrency;

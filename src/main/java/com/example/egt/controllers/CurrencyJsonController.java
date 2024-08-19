@@ -9,7 +9,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +40,14 @@ public class CurrencyJsonController {
             @ApiResponse(responseCode = "404", description = "Currency with this symbol was not found",
                     content = @Content)})
     @PostMapping("/currency")
-    public Currency getCurrency(@RequestBody CurrentRequestDto currentRequestDto) {
-        return currencyService.getCurrencyByCode(currentRequestDto.getBase());
+    public ResponseEntity<?> getCurrency(@Valid @RequestBody CurrentRequestDto currentRequestDto) {
+        try {
+            Currency currency = currencyService.getCurrencyByCode(currentRequestDto.getBase());
+            return ResponseEntity.ok(currency);
+        } catch (CurrencyNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Currency not found: " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input: " + e.getMessage());
+        }
     }
 }
