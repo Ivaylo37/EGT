@@ -9,7 +9,7 @@ This service fetches and caches currency exchange rate data from Fixer.io.
 - Caching: Redis (containerized with Docker)
 - Database: PostgreSQL (local)
 - API Documentation: Swagger
-- Test Coverage: --% on services
+- Test Coverage: 100% on services(84% line coverage)
 
 ## Technical Stack
 
