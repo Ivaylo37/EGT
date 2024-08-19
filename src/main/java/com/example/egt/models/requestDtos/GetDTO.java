@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class GetDTO {
     @JacksonXmlProperty(isAttribute = true)
-    private String consumer;
+    private String client;
 
     @JacksonXmlProperty(localName = "currency")
     private String currency;

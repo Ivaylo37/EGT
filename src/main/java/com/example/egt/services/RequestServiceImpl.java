@@ -2,6 +2,7 @@ package com.example.egt.services;
 
 import com.example.egt.exceptions.DuplicateRequestException;
 import com.example.egt.models.Request;
+import com.example.egt.models.requestDtos.CommandDTO;
 import com.example.egt.models.requestDtos.CurrentRequestDTO;
 import com.example.egt.models.requestDtos.HistoryRequestDTO;
 import com.example.egt.repos.RequestRepository;
@@ -51,6 +52,33 @@ public class RequestServiceImpl implements RequestService {
         if (request != null) {
             throw new DuplicateRequestException("This request already exists");
         }
+    }
+
+    @Override
+    public void processXmlRequest(CommandDTO commandDTO) {
+        Request request = requestRepository.findRequestByRequestId(commandDTO.getId());
+        if (request != null) {
+            throw new DuplicateRequestException("This request already exists");
+        }
+        request = new Request();
+        request.setRequestId(commandDTO.getId());
+        request.setTimestamp(LocalDateTime.now());
+        request.setClientId(commandDTO.getGet().getClient());
+        request.setBaseCurrency(commandDTO.getGet().getCurrency());
+    }
+
+    @Override
+    public void processXmlHistoryRequest(CommandDTO commandDTO) {
+        Request request = requestRepository.findRequestByRequestId(commandDTO.getId());
+        if (request != null) {
+            throw new DuplicateRequestException("This request already exists");
+        }
+        request = new Request();
+        request.setRequestId(commandDTO.getId());
+        request.setTimestamp(LocalDateTime.now());
+        request.setClientId(commandDTO.getGet().getClient());
+        request.setBaseCurrency(commandDTO.getGet().getCurrency());
+        request.setPeriod(commandDTO.getHistory().getPeriod());
     }
 
 }
