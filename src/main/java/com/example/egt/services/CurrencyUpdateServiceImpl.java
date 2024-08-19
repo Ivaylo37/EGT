@@ -20,7 +20,7 @@ public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
         this.currencyRepository = currencyRepository;
     }
 
-    @Scheduled(fixedRate = 3600000) // Run every hour (3600000 milliseconds)
+    @Scheduled(fixedRateString = "${application.scheduler.currency-update.fixed-rate}")
     public void updateCurrencyRates() {
         System.out.println("Updating Currency Rates");
         FixerApiResponse response = fixerApiService.getLatestRates();
