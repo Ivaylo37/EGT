@@ -65,6 +65,7 @@ public class RequestServiceImpl implements RequestService {
         request.setTimestamp(LocalDateTime.now());
         request.setClientId(commandDTO.getGet().getClient());
         request.setBaseCurrency(commandDTO.getGet().getCurrency());
+        requestRepository.save(request);
     }
 
     @Override
@@ -79,6 +80,7 @@ public class RequestServiceImpl implements RequestService {
         request.setClientId(commandDTO.getGet().getClient());
         request.setBaseCurrency(commandDTO.getGet().getCurrency());
         request.setPeriod(commandDTO.getHistory().getPeriod());
+        requestRepository.save(request);
     }
 
 }
