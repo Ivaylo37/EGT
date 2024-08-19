@@ -1,6 +1,6 @@
 package com.example.egt.models;
 
-import com.example.egt.CustomLocalDateTimeDeserializer;
+import com.example.egt.configs.CustomLocalDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
 

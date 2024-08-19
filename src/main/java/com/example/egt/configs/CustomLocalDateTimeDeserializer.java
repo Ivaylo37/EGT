@@ -1,4 +1,4 @@
-package com.example.egt;
+package com.example.egt.configs;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

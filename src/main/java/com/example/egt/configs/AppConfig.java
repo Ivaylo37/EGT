@@ -1,4 +1,4 @@
-package com.example.egt;
+package com.example.egt.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

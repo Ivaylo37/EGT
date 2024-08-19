@@ -1,4 +1,4 @@
-package com.example.egt;
+package com.example.egt.configs;
 import com.example.egt.models.Currency;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
