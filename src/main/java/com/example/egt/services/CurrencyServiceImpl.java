@@ -33,7 +33,7 @@ public class CurrencyServiceImpl implements CurrencyService {
             return cachedCurrency;
         }
 
-        Currency currency = currencyRepository.findTopByBaseOrderByDateDesc(code);
+        Currency currency = currencyRepository.findTopByBaseOrderByDateDesc(code.toUpperCase());
         if (currency != null) {
             redisTemplate.opsForValue().set(cacheKey, currency);
         } else {

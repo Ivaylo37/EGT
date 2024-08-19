@@ -1,6 +1,8 @@
 package com.example.egt.models;
 
+import com.example.egt.CustomLocalDateTimeDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +34,7 @@ public class Currency {
 
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = CustomLocalDateTimeDeserializer.class)
     private LocalDateTime date;
 
     @ElementCollection
